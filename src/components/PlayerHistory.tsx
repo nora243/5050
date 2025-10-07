@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useAccount, useReadContract, useChainId } from 'wagmi'
 import { formatEther } from 'viem'
-import { CONTRACT_ADDRESS_MAINNET, CONTRACT_ADDRESS_SEPOLIA, CONTRACT_ABI } from '@/lib/wagmi'
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from '@/lib/wagmi'
 import RefreshButton from './RefreshButton'
 import { useLanguage } from '@/hooks/useLanguage'
 
@@ -37,13 +37,6 @@ export default function PlayerHistory() {
   const [totalGames, setTotalGames] = useState(0)
   const pageSize = 10
   const { address, isConnected } = useAccount()
-  const chainId = useChainId()
-    // Determine contract address based on connected chain
-  const CONTRACT_ADDRESS = chainId == Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_MAINNET)
-      ? CONTRACT_ADDRESS_MAINNET
-      : chainId == Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_SEPOLIA)
-      ? CONTRACT_ADDRESS_SEPOLIA
-      : CONTRACT_ADDRESS_SEPOLIA
 
   useEffect(() => {
     setMounted(true)

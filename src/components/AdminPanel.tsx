@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useAccount, useWriteContract, useReadContract, useChainId } from 'wagmi'
 import { parseEther, formatEther } from 'viem'
-import { CONTRACT_ADDRESS_MAINNET, CONTRACT_ADDRESS_SEPOLIA, CONTRACT_ABI } from '@/lib/wagmi'
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from '@/lib/wagmi'
 import RefreshButton from './RefreshButton'
 
 export default function AdminPanel() {
@@ -16,14 +16,6 @@ export default function AdminPanel() {
     const [isRefreshingContract, setIsRefreshingContract] = useState(false)
 
     const { writeContract, isPending } = useWriteContract()
-
-    const chainId = useChainId()
-    // Determine contract address based on connected chain
-    const CONTRACT_ADDRESS = chainId == Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_MAINNET)
-        ? CONTRACT_ADDRESS_MAINNET
-        : chainId == Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_SEPOLIA)
-            ? CONTRACT_ADDRESS_SEPOLIA
-            : CONTRACT_ADDRESS_SEPOLIA
 
     // Read contract owner
     const { data: contractOwner } = useReadContract({
