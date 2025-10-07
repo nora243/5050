@@ -1,7 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
+// import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { sdk } from '@farcaster/miniapp-sdk';
+import { useEffect } from 'react';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,16 +23,19 @@ const inter = Inter({
   weight: ["400", "700", "900"],
 });
 
-export const metadata: Metadata = {
-  title: "50-50 Game - Base Blockchain",
-  description: "Play the ultimate 50-50 chance game on Base blockchain",
-};
+// export const metadata: Metadata = {
+//   title: "50-50 Game - Base Blockchain",
+//   description: "Play the ultimate 50-50 chance game on Base blockchain",
+// };
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+        sdk.actions.ready();
+    }, []);
   return (
     <html lang="en">
       <body
