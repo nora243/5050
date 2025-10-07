@@ -1,0 +1,208 @@
+/* Pixel Art Styles */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+/* Pixel font and base styles */
+.pixel-font {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.pixel-title-font {
+  font-family: 'Orbitron', 'Courier New', monospace;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+/* Vietnamese-friendly font for card titles only */
+.pixel-card-title {
+  font-family: var(--font-inter), 'Inter', 'Segoe UI', 'Arial', 'Helvetica Neue', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+/* Pixel Box Shadows */
+.pixel-shadow {
+  box-shadow: 
+    0 0 0 2px #000,
+    2px 2px 0 2px #000,
+    4px 4px 0 2px rgba(0,0,0,0.3);
+}
+
+.pixel-shadow-hover {
+  transition: all 0.1s ease-in-out;
+}
+
+.pixel-shadow-hover:hover {
+  box-shadow: 
+    0 0 0 2px #000,
+    3px 3px 0 2px #000,
+    6px 6px 0 2px rgba(0,0,0,0.4);
+  transform: translate(-1px, -1px);
+}
+
+/* Pixel Border */
+.pixel-border {
+  border: none;
+  position: relative;
+}
+
+.pixel-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #000 25%, transparent 25%),
+              linear-gradient(-45deg, #000 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #000 75%),
+              linear-gradient(-45deg, transparent 75%, #000 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
+  z-index: -1;
+}
+
+/* Animated Pixel Background */
+@keyframes pixelShift {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 20px 20px; }
+}
+
+.pixel-bg-animated {
+  background-image: 
+    radial-gradient(circle at 25% 25%, #ff6b6b 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, #4ecdc4 2px, transparent 2px);
+  background-size: 20px 20px;
+  animation: pixelShift 4s linear infinite;
+}
+
+/* Pixel Button Styles */
+.pixel-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  border: 3px solid #000;
+  color: white;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  image-rendering: pixelated;
+}
+
+.pixel-btn::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: 
+    linear-gradient(90deg, #000 2px, transparent 2px),
+    linear-gradient(0deg, #000 2px, transparent 2px);
+  background-size: 6px 6px;
+  z-index: -1;
+}
+
+.pixel-btn:hover {
+  background: linear-gradient(135deg, #ff8e8e, #ff7575);
+  transform: translate(2px, 2px);
+  box-shadow: -2px -2px 0 #000, -4px -4px 0 rgba(0,0,0,0.3);
+}
+
+.pixel-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: -1px -1px 0 #000;
+}
+
+/* Pixel Card Styles */
+.pixel-card {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  border: 4px solid #000;
+  position: relative;
+}
+
+.pixel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.1) 2px,
+      rgba(255,255,255,0.1) 4px
+    );
+  pointer-events: none;
+}
+
+/* Meme Emojis Animation */
+@keyframes bounce {
+  0%, 20%, 60%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  80% { transform: translateY(-5px); }
+}
+
+.meme-emoji {
+  display: inline-block;
+  animation: bounce 2s infinite;
+  font-size: 1.5em;
+}
+
+.meme-emoji:nth-child(2) { animation-delay: 0.2s; }
+.meme-emoji:nth-child(3) { animation-delay: 0.4s; }
+
+/* Pixel Loading Animation */
+@keyframes pixelPulse {
+  0% { opacity: 1; background-color: #ff6b6b; }
+  50% { opacity: 0.6; background-color: #4ecdc4; }
+  100% { opacity: 1; background-color: #ff6b6b; }
+}
+
+.pixel-loading {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #ff6b6b;
+  animation: pixelPulse 1s infinite;
+  margin: 0 1px;
+}
+
+.pixel-loading:nth-child(2) { animation-delay: 0.2s; }
+.pixel-loading:nth-child(3) { animation-delay: 0.4s; }
+
+/* Retro Game Colors */
+.retro-green { color: #00ff41; }
+.retro-red { color: #ff3030; }
+.retro-yellow { color: #ffff00; }
+.retro-blue { color: #0080ff; }
+.retro-purple { color: #ff00ff; }
+.retro-cyan { color: #00ffff; }
+
+/* Glitch Effect */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch-text {
+  animation: glitch 0.3s infinite;
+}
+
+.glitch-text:hover {
+  animation: glitch 0.1s infinite;
+}

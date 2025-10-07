@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Popup animations */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+.animate-progress {
+  animation: progress 5s linear;
+}
+
+/* Pixel Art Styles */
+.pixel-font {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.pixel-title-font {
+  font-family: 'Orbitron', 'Courier New', monospace;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+/* Vietnamese-friendly font for card titles only */
+.pixel-card-title {
+  font-family: var(--font-inter), 'Inter', 'Segoe UI', 'Arial', 'Helvetica Neue', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+/* Animated Pixel Background */
+@keyframes pixelShift {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 20px 20px; }
+}
+
+.pixel-bg-animated {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 107, 107, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(78, 205, 196, 0.3) 2px, transparent 2px);
+  background-size: 20px 20px;
+  animation: pixelShift 4s linear infinite;
+}
+
+/* Meme Emojis Animation */
+@keyframes bounce {
+  0%, 20%, 60%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  80% { transform: translateY(-5px); }
+}
+
+.meme-emoji {
+  display: inline-block;
+  animation: bounce 2s infinite;
+  font-size: 1.5em;
+}
+
+.meme-emoji:nth-child(2) { animation-delay: 0.2s; }
+.meme-emoji:nth-child(3) { animation-delay: 0.4s; }
+
+/* Pixel Loading Animation */
+@keyframes pixelPulse {
+  0% { opacity: 1; background-color: #ff6b6b; }
+  50% { opacity: 0.6; background-color: #4ecdc4; }
+  100% { opacity: 1; background-color: #ff6b6b; }
+}
+
+.pixel-loading {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #ff6b6b;
+  animation: pixelPulse 1s infinite;
+  margin: 0 1px;
+}
+
+.pixel-loading:nth-child(2) { animation-delay: 0.2s; }
+.pixel-loading:nth-child(3) { animation-delay: 0.4s; }
+
+/* Retro Game Colors */
+.retro-green { color: #00ff41; }
+.retro-red { color: #ff3030; }
+.retro-yellow { color: #ffff00; }
+.retro-blue { color: #0080ff; }
+.retro-purple { color: #ff00ff; }
+.retro-cyan { color: #00ffff; }
+
+/* Glitch Effect */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch-text {
+  animation: glitch 0.3s infinite;
+}
+
+.glitch-text:hover {
+  animation: glitch 0.1s infinite;
+}
