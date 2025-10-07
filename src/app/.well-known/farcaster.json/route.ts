@@ -7,24 +7,24 @@ function withValidProperties(properties: Record<string, undefined | string | str
 export async function GET() {
     const URL = process.env.NEXT_PUBLIC_URL as string;
     return Response.json({
-        "accountAssociation": {  // these will be added in step 5
-            "header": "",
-            "payload": "",
-            "signature": ""
+        "accountAssociation": {
+            "header": "eyJmaWQiOjEzNDI0MTgsInR5cGUiOiJhdXRoIiwia2V5IjoiMHhhZDRCM2Q3MUI2YzgwRTkxOGRDZTdDRUFlYzdBMTlkODk1MUE3MzM1In0",
+            "payload": "eyJkb21haW4iOiI1MDUwLXNldmVuLnZlcmNlbC5hcHAifQ",
+            "signature": "k13zmAxuh7kTUXJqtSimuyHIHJiKvqq7rkOQLmol09gNdOFSjlhyDWeJ2/RJemm6ORWyItiQWKcnGGwpCb8xuhw="
         },
         "baseBuilder": {
             "allowedAddresses": ["0xCa2b01D0552A30F3619b53b2b59aA3d4358f1Fbf", "0xEDf20419eFECd79440C05CC645562D509a164263"] // add your Base Account address here
         },
         "miniapp": {
             "version": "1",
-            "name": "Example Mini App",
-            "homeUrl": "https://ex.co",
-            "iconUrl": "https://ex.co/i.png",
+            "name": "5050 Game",
+            "homeUrl": "https://5050-seven.vercel.app/",
+            "iconUrl": "https://5050-seven.vercel.app/favicon.ico",
             "splashImageUrl": "https://ex.co/l.png",
             "splashBackgroundColor": "#000000",
             "webhookUrl": "https://ex.co/api/webhook",
             "subtitle": "Fast, fun, social",
-            "description": "A fast, fun way to challenge friends in real time.",
+            "description": "CHOOSE ODD OR EVEN • PLACE YOUR BET • LET THE BLOCKCHAIN DECIDE YOUR FATE!",
             "screenshotUrls": [
                 "https://ex.co/s1.png",
                 "https://ex.co/s2.png",
