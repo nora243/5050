@@ -13,30 +13,30 @@ export async function GET() {
             "signature": "k13zmAxuh7kTUXJqtSimuyHIHJiKvqq7rkOQLmol09gNdOFSjlhyDWeJ2/RJemm6ORWyItiQWKcnGGwpCb8xuhw="
         },
         "baseBuilder": {
-            "allowedAddresses": ["0xCa2b01D0552A30F3619b53b2b59aA3d4358f1Fbf", "0xEDf20419eFECd79440C05CC645562D509a164263"] // add your Base Account address here
+            "allowedAddresses": ["0xCa2b01D0552A30F3619b53b2b59aA3d4358f1Fbf"] // add your Base Account address here
         },
         "miniapp": {
             "version": "1",
             "name": "5050 Game",
             "homeUrl": "https://5050-seven.vercel.app/",
             "iconUrl": "https://5050-seven.vercel.app/favicon.ico",
-            "splashImageUrl": "https://ex.co/l.png",
+            "splashImageUrl": "https://5050-seven.vercel.app/custompunk-base.png",
             "splashBackgroundColor": "#000000",
             "webhookUrl": "https://ex.co/api/webhook",
             "subtitle": "Fast, fun, social",
             "description": "CHOOSE ODD OR EVEN • PLACE YOUR BET • LET THE BLOCKCHAIN DECIDE YOUR FATE!",
             "screenshotUrls": [
-                "https://ex.co/s1.png",
-                "https://ex.co/s2.png",
-                "https://ex.co/s3.png"
+                "https://5050-seven.vercel.app/ss1.png",
+                "https://5050-seven.vercel.app/ss2.png",
+                "https://5050-seven.vercel.app/ss3.png"
             ],
             "primaryCategory": "social",
             "tags": ["example", "miniapp", "baseapp"],
-            "heroImageUrl": "https://ex.co/og.png",
+            "heroImageUrl": "https://5050-seven.vercel.app/custompunk-base.png",
             "tagline": "Play instantly",
-            "ogTitle": "Example Mini App",
+            "ogTitle": "5050 Game Mini App",
             "ogDescription": "Challenge friends in real time.",
-            "ogImageUrl": "https://ex.co/og.png",
+            "ogImageUrl": "https://5050-seven.vercel.app/custompunk-base.png",
             "noindex": true
         }
     }); // see the next step for the manifest_json_object
