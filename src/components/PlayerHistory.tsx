@@ -39,9 +39,9 @@ export default function PlayerHistory() {
   const { address, isConnected } = useAccount()
   const chainId = useChainId()
     // Determine contract address based on connected chain
-  const CONTRACT_ADDRESS = chainId === Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_MAINNET)
+  const CONTRACT_ADDRESS = chainId == Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_MAINNET)
       ? CONTRACT_ADDRESS_MAINNET
-      : chainId === Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_SEPOLIA)
+      : chainId == Number(process.env.NEXT_PUBLIC_CHAIN_ID_BASE_SEPOLIA)
       ? CONTRACT_ADDRESS_SEPOLIA
       : CONTRACT_ADDRESS_SEPOLIA
 
