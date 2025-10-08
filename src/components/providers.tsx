@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiProvider } from 'wagmi'
-import { RainbowKitProvider, lightTheme, darkTheme } from '@rainbow-me/rainbowkit'
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { config } from '@/lib/wagmi'
-import '@rainbow-me/rainbowkit/styles.css'
+import '@rainbow-me/rainbowkit/styles.css';
 
 // Singleton QueryClient để tránh tạo lại nhiều lần
 let globalQueryClient: QueryClient
@@ -40,15 +40,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider
-          theme={darkTheme({
-            accentColor: '#7b3cf0',
-            accentColorForeground: 'white',
-            borderRadius: 'medium',
-            fontStack: 'system',
-          })}
-          showRecentTransactions={true}
-        >
+        <RainbowKitProvider theme={darkTheme()} showRecentTransactions={true}>
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>

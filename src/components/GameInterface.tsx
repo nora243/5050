@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, useReadContract, useChainId } from 'wagmi'
 import { parseEther, formatEther } from 'viem'
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from '@/lib/wagmi'
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from '@/lib/wagmi'
+import { base } from 'wagmi/chains'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import RefreshButton from './RefreshButton'
 import PixelTitle from './PixelTitle'
@@ -14,11 +15,12 @@ import TransactionPopup from './TransactionPopup'
 import { useLanguage } from '@/hooks/useLanguage'
 
 export default function GameInterface() {
+    const chainId = useChainId()
     const [mounted, setMounted] = useState(false)
     const { address, isConnected } = useAccount()
     const { t, language } = useLanguage()
 
-    const [betAmount, setBetAmount] = useState('0.0000001')
+    const [betAmount, setBetAmount] = useState('0.000001')
     const [selectedChoice, setSelectedChoice] = useState<'odd' | 'even'>('odd')
     const [errorMessage, setErrorMessage] = useState('')
     const [isRulesExpanded, setIsRulesExpanded] = useState(false)
@@ -27,18 +29,18 @@ export default function GameInterface() {
     const [lastGameChoice, setLastGameChoice] = useState<'odd' | 'even'>('odd')
     const [lastGameResult, setLastGameResult] = useState<{ won: boolean, payout: string } | null>(null)
     const [isLoadingResult, setIsLoadingResult] = useState(false)
-  const [lastGameHash, setLastGameHash] = useState<string>('')
-  const [isRefreshingContract, setIsRefreshingContract] = useState(false)
-  const [isRefreshingWinnings, setIsRefreshingWinnings] = useState(false)
+    const [lastGameHash, setLastGameHash] = useState<string>('')
+    const [isRefreshingContract, setIsRefreshingContract] = useState(false)
+    const [isRefreshingWinnings, setIsRefreshingWinnings] = useState(false)
 
-  // Transaction popup states
-  const [showTxPopup, setShowTxPopup] = useState(false)
-  const [txPopupStatus, setTxPopupStatus] = useState<'pending' | 'success' | 'error' | null>(null)
-  const [txErrorMessage, setTxErrorMessage] = useState('')
+    // Transaction popup states
+    const [showTxPopup, setShowTxPopup] = useState(false)
+    const [txPopupStatus, setTxPopupStatus] = useState<'pending' | 'success' | 'error' | null>(null)
+    const [txErrorMessage, setTxErrorMessage] = useState('')
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     const { writeContract, data: hash, isPending } = useWriteContract()
     const { isLoading: isConfirming, isSuccess: txSuccess } = useWaitForTransactionReceipt({ hash })
@@ -66,7 +68,7 @@ export default function GameInterface() {
     })
 
     // Quick bet amounts
-    const quickBetAmounts = ['0.0000001', '0.000001', '0.00001', '0.0001']
+    const quickBetAmounts = ['0.000001', '0.00001', '0.0001']
 
     const setQuickBet = (amount: string) => {
         setBetAmount(amount)
@@ -151,12 +153,24 @@ export default function GameInterface() {
     const playGame = async () => {
         if (!isConnected || !address) return
 
-        try {
-            setErrorMessage('')
+        // Manual verification with wallet
+        if (window.ethereum) {
+            const walletChainId = await window.ethereum.request({ method: 'eth_chainId' })
+            const walletChainDecimal = parseInt(walletChainId, 16)
 
+            console.log('=== CHAIN VERIFICATION ===')
+            console.log('App chainId:', chainId)
+            console.log('Wallet chainId (hex):', walletChainId)
+            console.log('Wallet chainId (decimal):', walletChainDecimal)
+            console.log('Base chainId:', base.id)
+            console.log('Match?', walletChainDecimal === base.id)
+        }
+
+        try {
             // Reset previous game result and popup states
             setLastGameResult(null)
             setIsLoadingResult(false)
+            setErrorMessage('')
             setLastGameHash('')
             setTxErrorMessage('')
 
@@ -178,7 +192,7 @@ export default function GameInterface() {
                 abi: CONTRACT_ABI,
                 functionName: 'createGame',
                 args: [isOdd],
-                value: parseEther(betAmount),
+                value: parseEther(betAmount)
             })
         } catch (error) {
             console.error('Error playing game:', error)
@@ -279,6 +293,16 @@ export default function GameInterface() {
                         <ConnectButton />
                         <LanguageSwitcher />
                     </div>
+
+                    {/* Network Info */}
+                    {isConnected && (
+                        <div className="flex justify-center items-center space-x-2 text-sm">
+                            <span className="text-gray-400">Network:</span>
+                            <span className={`font-bold ${chainId === base.id ? 'text-green-400' : 'text-yellow-400'}`}>
+                                {chainId === base.id ? '🟢 Base Mainnet' : '🔴 Unsupported Network'}
+                            </span>
+                        </div>
+                    )}
                 </div>
 
                 {isConnected && (
@@ -325,7 +349,7 @@ export default function GameInterface() {
                                     </div>
 
                                     {/* Quick Bet Buttons */}
-                                    <div className="grid grid-cols-4 gap-3 mb-4">
+                                    <div className="grid grid-cols-3 gap-3 mb-4">
                                         {quickBetAmounts.map((amount) => (
                                             <PixelButton
                                                 key={amount}
@@ -473,26 +497,28 @@ export default function GameInterface() {
 
                         {/* Winnings */}
                         <PixelCard title={t.winningsVault} emoji="💰" className="rounded-2xl relative">
-                            <RefreshButton
-                                onRefresh={async () => {
-                                    setIsRefreshingWinnings(true)
-                                    try {
-                                        await refetchWinnings()
-                                    } finally {
-                                        setTimeout(() => setIsRefreshingWinnings(false), 500)
-                                    }
-                                }}
-                                title="Refetch winnings"
-                                variant="success"
-                                isLoading={isRefreshingWinnings}
-                                disabled={isRefreshingWinnings}
-                            />
                             <div className="flex items-center justify-between">
                                 <div className="text-xl pixel-font retro-green">
                                     {t.balance} <span className="text-white font-bold glitch-text">
                                         {winnings ? formatEther(winnings) : '0'} ETH
                                     </span>
+                                    <RefreshButton
+                                        onRefresh={async () => {
+                                            setIsRefreshingWinnings(true)
+                                            try {
+                                                await refetchWinnings()
+                                            } finally {
+                                                setTimeout(() => setIsRefreshingWinnings(false), 500)
+                                            }
+                                        }}
+                                        title="Refetch winnings"
+                                        variant="success"
+                                        isLoading={isRefreshingWinnings}
+                                        disabled={isRefreshingWinnings}
+                                        className='pl-2'
+                                    />
                                 </div>
+
                                 <PixelButton
                                     onClick={withdrawWinnings}
                                     disabled={isPending || isConfirming || !winnings || winnings === 0n}

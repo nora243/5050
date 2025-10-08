@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useAccount, useWriteContract, useReadContract, useChainId } from 'wagmi'
+import { useAccount, useWriteContract, useReadContract } from 'wagmi'
 import { parseEther, formatEther } from 'viem'
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from '@/lib/wagmi'
 import RefreshButton from './RefreshButton'
