@@ -1,6 +1,7 @@
 import { http, createConfig } from 'wagmi'
 import { base } from 'wagmi/chains'
 import { injected, safe, walletConnect } from 'wagmi/connectors'
+import { farcasterMiniApp as miniAppConnector } from '@farcaster/miniapp-wagmi-connector'
 
 const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID || ''
 
@@ -11,6 +12,7 @@ const getConfig = () => {
       injected(),
       walletConnect({ projectId }),
       safe(),
+      miniAppConnector()
     ],
     ssr: true,
     transports: {
