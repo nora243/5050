@@ -20,7 +20,9 @@ export async function GET() {
             "name": "5050 Game",
             "homeUrl": "https://5050-seven.vercel.app/",
             "iconUrl": "https://5050-seven.vercel.app/favicon.ico",
-            "splashImageUrl": "https://5050-seven.vercel.app/custompunk-base.png",
+            "imageUrl": "https://5050-seven.vercel.app/5050.png",
+            "buttonTitle": "Play 50-50 Game",
+            "splashImageUrl": "https://5050-seven.vercel.app/5050.png",
             "splashBackgroundColor": "#000000",
             "webhookUrl": "https://ex.co/api/webhook",
             "subtitle": "Fast, fun, social",
@@ -32,11 +34,11 @@ export async function GET() {
             ],
             "primaryCategory": "social",
             "tags": ["example", "miniapp", "baseapp"],
-            "heroImageUrl": "https://5050-seven.vercel.app/custompunk-base.png",
+            "heroImageUrl": "https://5050-seven.vercel.app/5050.png",
             "tagline": "Play instantly",
             "ogTitle": "5050 Game Mini App",
             "ogDescription": "Challenge friends in real time.",
-            "ogImageUrl": "https://5050-seven.vercel.app/custompunk-base.png",
+            "ogImageUrl": "https://5050-seven.vercel.app/5050.png",
             "noindex": true
         }
     }); // see the next step for the manifest_json_object
